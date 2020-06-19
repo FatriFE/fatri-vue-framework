@@ -1,0 +1,12 @@
+#!/bin/sh
+
+businessWebHome=$(dirname $(dirname $(readlink -f $0)))
+
+case "$1" in
+    version)
+        ;;
+    *)
+        sed -i -e "/server/s/localhost/${BUSINESS_CORE_SERVER:-localhost}/" ${businessWebHome}/conf/business-web.conf
+        exec nginx
+        ;;
+esac
