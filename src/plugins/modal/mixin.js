@@ -1,4 +1,12 @@
 export default {
+  data() {
+    return {
+      visible: false,
+    };
+  },
+  mounted() {
+    this.visible = true;
+  },
   methods: {
     handleCancel() {
       if (this.options.cancel) {
