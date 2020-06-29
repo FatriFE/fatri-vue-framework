@@ -27,7 +27,19 @@ module.exports = merge(baseConfig, {
           //     remPrecision: 8,
           //   },
           // },
-          'postcss-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: (loader) => [
+                require('postcss-import')({ root: loader.resourcePath }),
+                require('autoprefixer')({
+                  overrideBrowserslist: ['last 2 version', '>1%', 'ios 7'],
+                }),
+                require('cssnano')(),
+              ],
+            },
+          },
         ],
       },
       {
@@ -42,7 +54,19 @@ module.exports = merge(baseConfig, {
           //     remPrecision: 8,
           //   },
           // },
-          'postcss-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: (loader) => [
+                require('postcss-import')({ root: loader.resourcePath }),
+                require('autoprefixer')({
+                  overrideBrowserslist: ['last 2 version', '>1%', 'ios 7'],
+                }),
+                require('cssnano')(),
+              ],
+            },
+          },
           'less-loader',
           {
             loader: 'style-resources-loader',
