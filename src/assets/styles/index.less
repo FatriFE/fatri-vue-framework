@@ -35,6 +35,14 @@ textarea {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  vertical-align: middle;
+  &:focus {
+    outline: none;
+  }
+}
+
+.vertial-middle {
+  vertical-align: middle;
 }
 
 #root {
@@ -230,4 +238,20 @@ textarea {
 
 .cursor {
   cursor: pointer;
+}
+
+.fe-a-btn {
+  margin: 0 5px;
+  cursor: pointer;
+  color: @color-primary;
+  &:hover {
+    color: @color-primary-hover;
+  }
+}
+
+.fa-icon {
+  display: inline-block;
+  width: 24px;
+  margin-right: 5px;
+  text-align: center;
 }

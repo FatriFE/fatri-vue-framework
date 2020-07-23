@@ -2,8 +2,8 @@
   <div>
     <el-submenu :index="menu.path || 'null'">
       <template slot="title">
-        <i v-if="menu.icon" slot="title" :class="menu.icon"></i>
-        <span slot="title">{{ menu.title }}</span>
+        <i v-if="menu.icon" :class="[menu.icon, 'fa-icon']" style="font-size: 16px;"></i>
+        <span>{{ menu.title }}</span>
       </template>
       <template v-if="menu.children && menu.children.length > 0">
         <template v-for="(c, index) in menu.children">

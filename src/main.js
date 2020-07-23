@@ -28,7 +28,8 @@ import store from '@/store';
 import router from '@/router';
 
 /** style */
-import 'element-ui/lib/theme-chalk/index.css';
+// import 'element-ui/lib/theme-chalk/index.css';
+import '@/assets/elementui/theme/index.css';
 import 'font-awesome/css/font-awesome.css';
 import '@/assets/styles/animate.css';
 import '@/assets/styles/element-overwrite.less';
