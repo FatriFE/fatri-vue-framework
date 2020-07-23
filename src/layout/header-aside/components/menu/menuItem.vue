@@ -1,6 +1,6 @@
 <template>
   <el-menu-item :index="menu.path || 'null'">
-    <i v-if="menu.icon" :class="menu.icon"></i>
+    <i v-if="menu.icon" :class="menu.icon" style="font-size: 16px;"></i>
     <span slot="title">{{ menu.title }}</span>
   </el-menu-item>
 </template>
