@@ -11,5 +11,7 @@ module.exports = {
     remove: 'Remove',
     confirm: 'Confirm',
     cancel: 'Cancel',
+    copyright1: 'Copyright © 2011-',
+    copyright2: ' FATRI (Xiamen) Technologies Co., Ltd.',
   },
 };

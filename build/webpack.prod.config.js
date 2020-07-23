@@ -7,6 +7,10 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const merge = require('webpack-merge');
 const baseConfig = require('./webpack.base.config');
 
+function resolve(dir) {
+  return path.join(__dirname, '../', dir);
+}
+
 module.exports = merge(baseConfig, {
   mode: 'production',
   output: {
@@ -71,7 +75,7 @@ module.exports = merge(baseConfig, {
           {
             loader: 'style-resources-loader',
             options: {
-              patterns: path.resolve(__dirname, 'src/assets/styles/theme.less'),
+              patterns: resolve('src/assets/styles/theme.less'),
             },
           },
         ],

@@ -5,11 +5,11 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 function resolve(dir) {
-  return path.join(__dirname, dir);
+  return path.join(__dirname, '../', dir);
 }
 
 module.exports = {
-  entry: './src/main.js',
+  entry: resolve('src/main.js'),
   output: {
     path: resolve('dist'),
     publicPath: '/',
@@ -90,7 +90,8 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-        ...require('./env'),
+        VUE_APP_VERSION: JSON.stringify(require('../package.json').version),
+        ...require('../env'),
       },
     }),
     new VueLoaderPlugin(),

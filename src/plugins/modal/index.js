@@ -13,6 +13,7 @@ export default {
     let $el;
     Vue.prototype._i18n = options.i18n;
     Vue.prototype.$store = options.store;
+    Vue.prototype._router = options.router;
     Vue.prototype.$modal = {
       show(title, component, winData, width, confirm, cancel) {
         if (component) {

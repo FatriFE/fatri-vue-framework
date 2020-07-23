@@ -4,7 +4,7 @@ import VueRouter from 'vue-router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 
-import CookieServie from '@/util/CookieServie';
+import CookieService from '@/util/CookieService';
 
 import routes from './routes';
 
@@ -32,7 +32,7 @@ router.beforeEach(async (to, from, next) => {
   if (to.matched.some((r) => r.meta.auth)) {
     // 这里暂时将cookie里是否存有token作为验证是否登录的条件
     // 请根据自身业务需要修改
-    const token = CookieServie.getCookie('token');
+    const token = CookieService.getCookie('Business-Token');
     if (token && token !== 'undefined') {
       next();
     } else {

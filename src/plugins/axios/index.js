@@ -1,5 +1,5 @@
 import axios from 'axios';
-import CookieServie from '@/util/CookieServie';
+import CookieService from '@/util/CookieService';
 
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_URL,
@@ -14,7 +14,7 @@ const service = axios.create({
 service.interceptors.request.use(
   (config) => {
     if (config.url.indexOf('login') === -1) {
-      const token = CookieServie.getCookie('token');
+      const token = CookieService.getCookie('Business-Token');
       config.headers['Authorization'] = token;
     }
     return config;

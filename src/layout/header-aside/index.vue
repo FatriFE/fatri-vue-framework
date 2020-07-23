@@ -13,7 +13,7 @@
         <!-- locales -->
         <header-locales></header-locales>
         <!-- fullscreen -->
-        <header-fullscreen></header-fullscreen>
+        <!-- <header-fullscreen></header-fullscreen> -->
       </el-header>
       <!-- content -->
       <el-main class="fe-layout-content">
@@ -22,9 +22,9 @@
         </div>
       </el-main>
       <!-- footer -->
-      <el-footer class="fe-layout-footer">
-        Copyright © 2011-2020 西人马（厦门）科技有限公司 闽ICP备15025981号-1 闽公网安备 35020302001148号
-      </el-footer>
+      <el-footer
+        class="fe-layout-footer"
+      >{{ $t('common.copyright1') + new Date().getFullYear() + $t('common.copyright2') }}</el-footer>
     </el-container>
   </el-container>
 </template>
@@ -34,7 +34,7 @@ import { mapState, mapMutations } from 'vuex';
 import MenuAside from './components/menu-aside/index.vue';
 import HeaderUser from './components/header-user/index.vue';
 import HeaderLocales from './components/header-locales/index.vue';
-import HeaderFullscreen from './components/header-fullscreen/index.vue';
+// import HeaderFullscreen from './components/header-fullscreen/index.vue';
 
 export default {
   name: 'fe-layout',
@@ -42,7 +42,7 @@ export default {
     MenuAside,
     HeaderUser,
     HeaderLocales,
-    HeaderFullscreen,
+    // HeaderFullscreen,
   },
   computed: {
     ...mapState('system/layout', ['collapsed']),

@@ -26,6 +26,9 @@ const CookieService = {
     exp.setTime(exp.getTime() - 1);
     document.cookie = key + '=' + encodeURIComponent(data) + ';expires=' + exp.toUTCString() + ';path=/';
   },
+  clearLoginCookie() {
+    this.delCookie('Business-Token');
+  },
 };
 
 export default CookieService;

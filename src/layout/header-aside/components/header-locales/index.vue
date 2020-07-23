@@ -6,11 +6,15 @@
     </span>
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item command="zh-CN">
-        <i :class="{ 'fa fa-dot-circle-o': $i18n.locale === 'zh-CN', 'fa fa-circle-o': $i18n.locale === 'en' }"></i>
+        <i
+          :class="{ 'fa fa-dot-circle-o': $i18n.locale === 'zh-CN', 'fa fa-circle-o': $i18n.locale === 'en' }"
+        ></i>
         中文
       </el-dropdown-item>
       <el-dropdown-item command="en">
-        <i :class="{ 'fa fa-circle-o': $i18n.locale === 'zh-CN', 'fa fa-dot-circle-o': $i18n.locale === 'en' }"></i>
+        <i
+          :class="{ 'fa fa-circle-o': $i18n.locale === 'zh-CN', 'fa fa-dot-circle-o': $i18n.locale === 'en' }"
+        ></i>
         English
       </el-dropdown-item>
     </el-dropdown-menu>
@@ -18,7 +22,7 @@
 </template>
 
 <script>
-import CookieService from '@/util/CookieServie';
+import CookieService from '@/util/CookieService';
 
 export default {
   name: 'header-locales',
@@ -28,7 +32,7 @@ export default {
         return;
       }
       this.$i18n.locale = e;
-      CookieService.setCookie('lang', e, 1);
+      CookieService.setCookie('Business-Lang', e, 1);
       window.location.reload(true);
     },
   },
