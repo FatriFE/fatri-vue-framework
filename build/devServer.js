@@ -42,7 +42,7 @@ module.exports = {
   disableHostCheck: true,
   inline: true,
   compress: true,
-  contentBase: ['./dist'],
+  contentBase: ['./dist'], // 本地服务器加载的资源页面所在的目录
   publicPath: '/',
   stats: 'errors-only',
   staticOptions: {
@@ -64,7 +64,7 @@ module.exports = {
           });
         Promise.all(checkFiles).then(([json, normal]) => {
           if (json) {
-            sendJson(req, res, next, `${file  }.json`, targetPath);
+            sendJson(req, res, next, `${file}.json`, targetPath);
           } else if (normal) {
             sendJson(req, res, next, file, targetPath);
           } else {

@@ -11,19 +11,19 @@
       </el-dropdown-item>
       <el-dropdown-item command="changePwd">
         <i class="el-icon-edit-outline"></i>
-        修改密码</el-dropdown-item
-      >
+        修改密码
+      </el-dropdown-item>
       <el-dropdown-item command="logout">
         <i class="fa fa-power-off"></i>
-        退出登录</el-dropdown-item
-      >
+        退出登录
+      </el-dropdown-item>
     </el-dropdown-menu>
   </el-dropdown>
 </template>
 
 <script>
 import { mapState, mapMutations } from 'vuex';
-import CookieService from '@/util/CookieServie';
+import CookieService from '@/util/CookieService';
 
 export default {
   name: 'header-user',
@@ -40,7 +40,7 @@ export default {
       }
     },
     logout() {
-      CookieService.delCookie('token');
+      CookieService.delCookie('Business-Token');
       this.INFO({});
       this.$router.replace('/login');
     },

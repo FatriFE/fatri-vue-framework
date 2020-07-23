@@ -37,8 +37,11 @@ import '@/assets/styles/index.less';
 Vue.use(ElementUI);
 
 Vue.use(api);
-Vue.use(modal, { i18n, store });
+Vue.use(modal, { i18n, store, router });
 Vue.use(msg);
+
+// 当前版本
+Vue.prototype.$version = process.env.VUE_APP_VERSION;
 
 Vue.config.productionTip = false;
 

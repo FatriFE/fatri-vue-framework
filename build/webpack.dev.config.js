@@ -7,6 +7,10 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const baseConfig = require('./webpack.base.config');
 const devServer = require('./devServer');
 
+function resolve(dir) {
+  return path.join(__dirname, '../', dir);
+}
+
 function getNetworkIp() {
   let netHost = '';
   try {
@@ -91,7 +95,7 @@ module.exports = merge(baseConfig, {
           {
             loader: 'style-resources-loader',
             options: {
-              patterns: path.resolve(__dirname, 'src/assets/styles/theme.less'),
+              patterns: resolve('src/assets/styles/theme.less'),
             },
           },
         ],

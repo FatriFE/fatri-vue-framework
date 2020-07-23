@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
-import CookieServie from '@/util/CookieServie';
+import CookieService from '@/util/CookieService';
 
 Vue.use(VueI18n);
 
@@ -28,7 +28,7 @@ Vue.prototype.$languages = Object.keys(messages).map((language) => ({
   value: language,
 }));
 
-let langValue = CookieServie.getCookie('lang');
+let langValue = CookieService.getCookie('Business-Lang');
 if (!langValue || !['zh-CN', 'en'].includes(langValue)) {
   langValue = 'zh-CN';
 }

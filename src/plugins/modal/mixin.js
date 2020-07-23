@@ -7,6 +7,14 @@ export default {
   mounted() {
     this.visible = true;
   },
+  watch: {
+    '$router.app.$route': {
+      handler: function() {
+        this.$modal.hide();
+        this.visible = false;
+      },
+    },
+  },
   methods: {
     handleCancel() {
       if (this.options.cancel) {

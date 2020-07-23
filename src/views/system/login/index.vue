@@ -16,7 +16,13 @@
           </div>
           <div class="page-login--form" v-loading="loading">
             <el-card shadow="never">
-              <el-form ref="loginForm" label-position="top" :rules="rules" :model="formLogin" size="default">
+              <el-form
+                ref="loginForm"
+                label-position="top"
+                :rules="rules"
+                :model="formLogin"
+                size="default"
+              >
                 <el-form-item prop="username">
                   <el-input
                     type="text"
@@ -44,7 +50,10 @@
           </div>
         </div>
       </div>
-      <div class="page-login--content-footer"></div>
+      <div class="page-login--content-footer">
+        <span>V{{ $version }}</span>
+        {{ $t('common.copyright1') + new Date().getFullYear() + $t('common.copyright2') }}
+      </div>
     </div>
   </div>
 </template>
@@ -52,7 +61,7 @@
 <script>
 import { mapMutations } from 'vuex';
 import dayjs from 'dayjs';
-import CookieServie from '@/util/CookieServie';
+import CookieService from '@/util/CookieService';
 
 export default {
   name: 'login',
@@ -86,6 +95,7 @@ export default {
     };
   },
   mounted() {
+    CookieService.clearLoginCookie();
     this.timeInterval = setInterval(() => {
       this.refreshTime();
     }, 1000);
@@ -118,7 +128,7 @@ export default {
         .accountLogin(data)
         .then((data) => {
           const { accessToken } = data;
-          CookieServie.setCookie('token', accessToken, 1);
+          CookieService.setCookie('Business-Token', accessToken, 1);
 
           this.getAccountInfo();
         })
@@ -160,6 +170,7 @@ export default {
     left: 0;
     overflow: auto;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 500px;
@@ -229,6 +240,8 @@ export default {
     }
   }
   .page-login--content-footer {
+    font-size: 12px;
+    text-align: center;
     padding: 1em 0;
     .page-login--content-footer-locales {
       padding: 0px;

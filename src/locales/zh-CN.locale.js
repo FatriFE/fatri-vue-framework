@@ -11,5 +11,7 @@ module.exports = {
     remove: '移除',
     confirm: '确认',
     cancel: '取消',
+    copyright1: 'Copyright © 2011-',
+    copyright2: ' 西人马（厦门）科技有限公司 闽ICP备15025981号-2 闽公网安备 35020302001148号',
   },
 };
