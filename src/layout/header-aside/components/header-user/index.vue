@@ -2,20 +2,20 @@
   <el-dropdown class="fe-layout-dropdown" trigger="hover" szie="small" @command="changeUser">
     <span class="el-dropdown-link">
       <i class="el-icon-user el-icon--right"></i>
-      {{ info.name }}
+      {{ info.name ? `${info.name}` : $t('common.unlogin') }}
     </span>
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item command="userInfo">
         <i class="el-icon-info"></i>
-        用户信息
+        {{ $t('common.userInfo') }}
       </el-dropdown-item>
       <el-dropdown-item command="changePwd">
         <i class="el-icon-edit-outline"></i>
-        修改密码
+        {{ $t('common.editPwd') }}
       </el-dropdown-item>
       <el-dropdown-item command="logout">
         <i class="fa fa-power-off"></i>
-        退出登录
+        {{ $t('common.logout') }}
       </el-dropdown-item>
     </el-dropdown-menu>
   </el-dropdown>

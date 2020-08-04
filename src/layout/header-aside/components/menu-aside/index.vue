@@ -1,19 +1,15 @@
 <template>
-  <div>
+  <div class="fe-aside-box">
     <el-menu
       class="fe-aside"
       :collapse="collapsed"
       :unique-opened="true"
       :default-active="active"
-      background-color="#192129"
+      background-color="#2b5e79"
       text-color="#fff"
-      active-text-color="#ea4505"
+      active-text-color="#fff"
       @select="handleSelect"
     >
-      <div class="fe-aside-logo">
-        <img v-if="!collapsed" src="/images/logo_white.png" alt="logo" class="fe-aside-logo-img animated fadeInRight" />
-        <img v-if="collapsed" src="/images/logo_white2.png" alt="logo" class="fe-aside-logo-img animated fadeInRight" />
-      </div>
       <template v-if="asideList && asideList.length > 0">
         <template v-for="(menu, index) in asideList">
           <menu-item v-if="menu.children === undefined" :key="index + ''" :menu="menu"></menu-item>
@@ -27,6 +23,7 @@
 
 <script>
 import { mapState } from 'vuex';
+import BScroll from 'better-scroll';
 import SubMenu from '../menu/subMenu.vue';
 import MenuItem from '../menu/menuItem.vue';
 
@@ -36,6 +33,7 @@ export default {
   data() {
     return {
       active: '',
+      BS: null,
     };
   },
   computed: {
@@ -43,6 +41,12 @@ export default {
     ...mapState('system/aside', ['asideList']),
   },
   watch: {
+    collapsed(val) {
+      this.scrollDestroy();
+      setTimeout(() => {
+        this.scrollInit();
+      }, 500);
+    },
     '$route.fullPath': {
       handler(value) {
         this.active = value;
@@ -51,6 +55,24 @@ export default {
     },
   },
   methods: {
+    scrollInit() {
+      this.BS = new BScroll(this.$el, {
+        mouseWheel: true,
+        click: true,
+        // scrollbar: {
+        //   fade: true,
+        //   interactive: false,
+        // },
+      });
+    },
+    scrollDestroy() {
+      try {
+        this.BS.destroy();
+      } catch (e) {
+        delete this.BS;
+        this.BS = null;
+      }
+    },
     handleSelect(index) {
       if (!index) {
         return;
@@ -60,25 +82,32 @@ export default {
       });
     },
   },
+  mounted() {
+    this.scrollInit();
+  },
+  beforeDestroy() {
+    this.scrollDestroy();
+  },
 };
 </script>
 
 <style lang="less">
-.fe-aside {
-  width: 200px;
-  height: 100%;
-  &.el-menu--collpase {
-    width: 64px;
-    min-height: 400px;
-  }
-  .fe-aside-logo {
-    padding: 14px 20px;
-    height: 60px;
-    background-color: #192129;
-    box-sizing: border-box;
-    .fe-aside-logo-img {
-      height: 32px;
-      line-height: 32px;
+.fe-aside-box {
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  .fe-aside {
+    width: 100%;
+    border: none;
+    .el-menu-item.is-active {
+      background-color: #173f55 !important;
+    }
+    .el-submenu__icon-arrow {
+      color: #fff;
+      font-size: 16px;
     }
   }
 }

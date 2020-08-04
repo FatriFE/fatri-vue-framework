@@ -1,7 +1,7 @@
 <template>
   <div class="page-not-found">
     <p class="page-not-found_title">404 page not found</p>
-    <el-button class="mt-20" @click="$router.replace({ paht: '/' })">返回首页</el-button>
+    <el-button class="mt-20" @click="$router.replace({ paht: '/' })">{{ $t('common.backToIndex') }}</el-button>
   </div>
 </template>
 <script>

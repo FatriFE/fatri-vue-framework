@@ -1,30 +1,39 @@
 <template>
   <el-container class="fe-layout">
-    <!-- aside -->
-    <menu-aside></menu-aside>
-    <el-container style="overflow-x: hidden;">
-      <!-- header -->
-      <el-header class="fe-layout-header">
-        <!-- collapse trigger icon -->
-        <i v-if="!collapsed" class="el-icon-s-fold font-20 fe-lauout-trigger" @click="toogle"></i>
-        <i v-if="collapsed" class="el-icon-s-unfold font-20 fe-lauout-trigger" @click="toogle"></i>
-        <!-- user info -->
-        <header-user></header-user>
-        <!-- locales -->
-        <header-locales></header-locales>
-        <!-- fullscreen -->
-        <!-- <header-fullscreen></header-fullscreen> -->
-      </el-header>
+    <!-- header -->
+    <el-header class="fe-layout-header">
+      <!-- logo -->
+      <header-logo></header-logo>
+      <!-- collapse trigger icon -->
+      <i v-if="!collapsed" class="el-icon-s-fold font-20 fe-lauout-trigger" @click="toogle"></i>
+      <i v-if="collapsed" class="el-icon-s-unfold font-20 fe-lauout-trigger" @click="toogle"></i>
+      <!-- user info -->
+      <header-user></header-user>
+      <!-- locales -->
+      <header-locales></header-locales>
+      <!-- fullscreen -->
+      <!-- <header-fullscreen></header-fullscreen> -->
+    </el-header>
+    <el-container style="position: relative; width: 100%; height: calc(100% - 60px);">
+      <!-- aside -->
+      <div
+        class="fe-layout-aside"
+        :style="{ width: collapsed ? '64px' : '200px', minWidth: collapsed ? '64px' : '200px' }"
+      >
+        <menu-aside></menu-aside>
+      </div>
       <!-- content -->
-      <el-main class="fe-layout-content">
-        <div class="fe-layout-content-container">
-          <router-view></router-view>
-        </div>
-      </el-main>
-      <!-- footer -->
-      <el-footer
-        class="fe-layout-footer"
-      >{{ $t('common.copyright1') + new Date().getFullYear() + $t('common.copyright2') }}</el-footer>
+      <el-container style="overflow-x: hidden;">
+        <el-main class="fe-layout-content">
+          <div class="fe-layout-content-container">
+            <router-view></router-view>
+          </div>
+        </el-main>
+        <!-- footer -->
+        <el-footer
+          class="fe-layout-footer"
+        >{{ $t('common.copyright1') + new Date().getFullYear() + $t('common.copyright2') }}</el-footer>
+      </el-container>
     </el-container>
   </el-container>
 </template>
@@ -32,6 +41,7 @@
 <script>
 import { mapState, mapMutations } from 'vuex';
 import MenuAside from './components/menu-aside/index.vue';
+import HeaderLogo from './components/header-logo/index.vue';
 import HeaderUser from './components/header-user/index.vue';
 import HeaderLocales from './components/header-locales/index.vue';
 // import HeaderFullscreen from './components/header-fullscreen/index.vue';
@@ -40,6 +50,7 @@ export default {
   name: 'fe-layout',
   components: {
     MenuAside,
+    HeaderLogo,
     HeaderUser,
     HeaderLocales,
     // HeaderFullscreen,
@@ -61,11 +72,18 @@ export default {
 <style lang="less">
 .fe-layout {
   height: 100%;
+  min-width: 900px !important;
   .fe-layout-header {
     padding: 0;
     background-color: @color-white-bg;
     box-shadow: 0 0 12px -2px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
+  }
+  .fe-layout-aside {
+    position: relative;
+    opacity: 1;
+    transition: all 0.3s;
+    background-color: #2b5e79;
   }
   .fe-layout-content {
     width: 100%;
@@ -112,14 +130,6 @@ export default {
       &:hover {
         color: @color-primary;
       }
-    }
-  }
-  .fe-layout-fullscreen-button {
-    float: right;
-    margin: 10px 20px;
-    color: @color-text-normal;
-    &:hover {
-      color: @color-primary;
     }
   }
 }
