@@ -2,20 +2,18 @@
   <el-dropdown class="fe-layout-dropdown" trigger="hover" szie="small" @command="changeLocale">
     <span class="el-dropdown-link">
       <i class="fa fa-language mr-5"></i>
-      {{ $i18n.locale === 'zh-CN' ? '中文' : 'English' }}
+      {{ $languages.find((i) => i.value === $i18n.locale).label }}
     </span>
     <el-dropdown-menu slot="dropdown">
-      <el-dropdown-item command="zh-CN">
+      <el-dropdown-item
+        v-for="language in $languages"
+        :key="language.value"
+        :command="language.value"
+      >
         <i
-          :class="{ 'fa fa-dot-circle-o': $i18n.locale === 'zh-CN', 'fa fa-circle-o': $i18n.locale === 'en' }"
-        ></i>
-        中文
-      </el-dropdown-item>
-      <el-dropdown-item command="en">
-        <i
-          :class="{ 'fa fa-circle-o': $i18n.locale === 'zh-CN', 'fa fa-dot-circle-o': $i18n.locale === 'en' }"
-        ></i>
-        English
+          :class="$i18n.locale === language.value ? 'fa fa-dot-circle-o mr-5' : 'fa fa-circle-o mr-5'"
+        />
+        {{ language.label }}
       </el-dropdown-item>
     </el-dropdown-menu>
   </el-dropdown>
