@@ -2,7 +2,7 @@ import Vue from 'vue';
 import store from '@/store/index.js';
 
 function checkArray(key) {
-  let arr = store.state.business.permission.permissionArr;
+  let arr = store.state.system.permission.permissionArr;
   if (arr.indexOf(key) > -1) {
     return true;
   }

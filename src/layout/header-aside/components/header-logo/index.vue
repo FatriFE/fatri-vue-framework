@@ -1,17 +1,7 @@
 <template>
-  <div class="fe-aside-logo" :style="{ width: collapsed ? '64px' : '200px' }">
-    <img
-      v-if="collapsed"
-      src="/images/logo_white2.png"
-      alt="logo"
-      class="fe-aside-logo-img animated fadeInRight"
-    />
-    <img
-      v-if="!collapsed"
-      src="/images/logo_white.png"
-      alt="logo"
-      class="fe-aside-logo-img animated fadeInLeft"
-    />
+  <div class="fe-aside-logo" :style="{ width: asideCollapse ? '64px' : '200px' }">
+    <img v-if="asideCollapse" src="/images/logo_white2.png" alt="logo" class="fe-aside-logo-img animated fadeInRight" />
+    <img v-if="!asideCollapse" src="/images/logo_white.png" alt="logo" class="fe-aside-logo-img animated fadeInLeft" />
   </div>
 </template>
 
@@ -21,7 +11,7 @@ import { mapState } from 'vuex';
 export default {
   name: 'header-logo',
   computed: {
-    ...mapState('system/layout', ['collapsed']),
+    ...mapState('system/layout', ['asideCollapse']),
   },
 };
 </script>

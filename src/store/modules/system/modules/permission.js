@@ -4,8 +4,8 @@ export default {
     permissionArr: [],
   },
   mutations: {
-    PERMISSION_ARR(state, array) {
-      state.permissionArr = array;
+    savePermissionArr(state, permissionArr) {
+      state.permissionArr = permissionArr;
     },
   },
 };

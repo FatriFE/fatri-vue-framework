@@ -16,9 +16,9 @@
     <div class="fe-create-header-right pull-right">
       <template v-if="btns.length > 0">
         <template v-for="btn in btns">
-          <el-button class="fe-create-btn" :key="btn.id" :icon="btn.icon" type="primary" @click="btn.click">{{
-            btn.text
-          }}</el-button>
+          <el-button class="fe-create-btn" :key="btn.id" :icon="btn.icon" type="primary" @click="btn.click">
+            {{ btn.text }}
+          </el-button>
         </template>
       </template>
     </div>
@@ -26,7 +26,7 @@
 </template>
 <script>
 export default {
-  name: 'fe-create-header',
+  name: 'feCreateHeader',
   props: {
     header: {
       type: Object,

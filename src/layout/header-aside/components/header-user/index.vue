@@ -23,26 +23,36 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex';
-import CookieService from '@/util/CookieService';
 
 export default {
   name: 'header-user',
   computed: {
-    ...mapState('system/user', ['info']),
+    ...mapState('system/account', ['info']),
   },
   methods: {
     ...mapMutations({
-      INFO: 'system/user/INFO',
+      logout: 'system/account/logout',
     }),
     changeUser(e) {
       if (e === 'logout') {
-        this.logout();
+        this.logOff();
       }
     },
-    logout() {
-      CookieService.delCookie('Business-Token');
-      this.INFO({});
-      this.$router.replace('/login');
+    logOff() {
+      this.$confirm(this.$t('common.logoutSure'), this.$t('common.logout'), {
+        confirmButtonText: this.$t('common.confirm'),
+        cancelButtonText: this.$t('common.cancel'),
+        type: 'warning',
+      })
+        .then(() => {
+          this.logout();
+        })
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: this.$t('common.cancelLogout'),
+          });
+        });
     },
   },
 };

@@ -161,8 +161,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .wrapper {
-  width: calc(100% - 20px);
-  height: calc(100% - 20px);
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 10px;
   left: 10px;
