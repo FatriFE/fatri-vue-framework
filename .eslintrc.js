@@ -13,5 +13,10 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-unused-vars': ['off', { vars: 'all', args: 'none' }],
+    semi: ['error', 'always'],
+    'comma-dangle': ['off'],
+    'space-before-function-paren': ['off'],
+    indent: ['off'],
+    'node/no-deprecated-api': ['off'],
   },
 };

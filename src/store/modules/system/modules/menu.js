@@ -1,11 +1,11 @@
 export default {
   namespaced: true,
   state: {
-    asideList: false,
+    aside: [],
   },
   mutations: {
-    ASIDE_LIST(state, list) {
-      state.asideList = list;
+    saveAside(state, aside) {
+      state.aside = aside;
     },
   },
 };

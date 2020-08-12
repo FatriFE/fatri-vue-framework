@@ -5,8 +5,8 @@
       <!-- logo -->
       <header-logo></header-logo>
       <!-- collapse trigger icon -->
-      <i v-if="!collapsed" class="el-icon-s-fold font-20 fe-lauout-trigger" @click="toogle"></i>
-      <i v-if="collapsed" class="el-icon-s-unfold font-20 fe-lauout-trigger" @click="toogle"></i>
+      <i v-if="!asideCollapse" class="el-icon-s-fold font-20 fe-lauout-trigger" @click="toogle"></i>
+      <i v-if="asideCollapse" class="el-icon-s-unfold font-20 fe-lauout-trigger" @click="toogle"></i>
       <!-- user info -->
       <header-user></header-user>
       <!-- locales -->
@@ -18,7 +18,7 @@
       <!-- aside -->
       <div
         class="fe-layout-aside"
-        :style="{ width: collapsed ? '64px' : '200px', minWidth: collapsed ? '64px' : '200px' }"
+        :style="{ width: asideCollapse ? '64px' : '200px', minWidth: asideCollapse ? '64px' : '200px' }"
       >
         <menu-aside></menu-aside>
       </div>
@@ -30,9 +30,9 @@
           </div>
         </el-main>
         <!-- footer -->
-        <el-footer
-          class="fe-layout-footer"
-        >{{ $t('common.copyright1') + new Date().getFullYear() + $t('common.copyright2') }}</el-footer>
+        <el-footer class="fe-layout-footer">{{
+          $t('common.copyright1') + new Date().getFullYear() + $t('common.copyright2')
+        }}</el-footer>
       </el-container>
     </el-container>
   </el-container>
@@ -56,14 +56,14 @@ export default {
     // HeaderFullscreen,
   },
   computed: {
-    ...mapState('system/layout', ['collapsed']),
+    ...mapState('system/layout', ['asideCollapse']),
   },
   methods: {
     ...mapMutations({
-      COLLAPSED: 'system/layout/COLLAPSED',
+      saveAsideCollapse: 'system/layout/saveAsideCollapse',
     }),
     toogle() {
-      this.COLLAPSED(!this.collapsed);
+      this.saveAsideCollapse(!this.asideCollapse);
     },
   },
 };

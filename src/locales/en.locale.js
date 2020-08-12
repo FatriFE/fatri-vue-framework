@@ -13,6 +13,8 @@ module.exports = {
     cancel: 'Cancel',
     login: 'Login',
     logout: 'Log Out',
+    logoutSure: 'Are you sure you want to log out',
+    cancelLogout: 'Cancel logout',
     unlogin: 'Not logged in',
     editPwd: 'Edit password',
     userInfo: 'User info',

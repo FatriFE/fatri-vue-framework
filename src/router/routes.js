@@ -1,11 +1,12 @@
 import layoutHeaderAside from '@/layout/header-aside/index.vue';
 
+// 懒加载页面
+const _import = (file) => () => import(/* webpackChunkName: "[request]" */ '@/views/' + file);
+
 const frameIn = [
   {
     path: '/',
-    redirect: {
-      name: 'index',
-    },
+    redirect: { name: 'index' },
     component: layoutHeaderAside,
     children: [
       {
@@ -14,7 +15,7 @@ const frameIn = [
         meta: {
           auth: true,
         },
-        component: () => import(/* webpackChunkName: "helloPage" */ '@/views/business/helloPage/index.vue'),
+        component: _import('business/helloPage'),
       },
       {
         path: 'user',
@@ -22,7 +23,7 @@ const frameIn = [
         meta: {
           auth: true,
         },
-        component: () => import(/* webpackChunkName: "user" */ '@/views/business/user/index.vue'),
+        component: _import('business/user'),
       },
       {
         path: 'role',
@@ -30,7 +31,21 @@ const frameIn = [
         meta: {
           auth: true,
         },
-        component: () => import(/* webpackChunkName: "role" */ '@/views/business/role/index.vue'),
+        component: _import('business/role'),
+      },
+      // 刷新页面 必须保留 勿删
+      {
+        path: 'refresh',
+        name: 'refresh',
+        hidden: true,
+        component: _import('system/function/refresh'),
+      },
+      // 页面重定向 必须保留 勿删
+      {
+        path: 'redirect/:route*',
+        name: 'redirect',
+        hidden: true,
+        component: _import('system/function/redirect'),
       },
     ],
   },
@@ -40,7 +55,7 @@ const frameOut = [
   {
     path: '/login',
     name: 'login',
-    component: () => import(/* webpackChunkName: "login" */ '@/views/system/login/index.vue'),
+    component: _import('system/login'),
   },
 ];
 
@@ -48,8 +63,12 @@ const errorPage = [
   {
     path: '*',
     name: '404',
-    component: () => import(/* webpackChunkName: "pageNotFound" */ '@/views/system/pageNotFound/index.vue'),
+    component: _import('system/error/404'),
   },
 ];
 
+// 导出需要显示菜单的
+export const frameInRoutes = frameIn;
+
+// 重新组织后导出
 export default [...frameIn, ...frameOut, ...errorPage];

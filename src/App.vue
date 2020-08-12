@@ -19,6 +19,13 @@ export default {
       document.querySelector('html').setAttribute('lang', val);
     },
   },
+  mounted() {
+    // 找到加载动画的id，并删除
+    const $loadingEl = document.getElementById('fe-main__loading');
+    if ($loadingEl) {
+      document.body.removeChild($loadingEl);
+    }
+  },
 };
 </script>
 <style lang="less">

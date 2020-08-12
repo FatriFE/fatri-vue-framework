@@ -87,10 +87,10 @@ export const getBrowserType = () => {
     return { type: 'Chrome', version };
   }
   if (userAgent.indexOf('Trident') > -1 && userAgent.indexOf('compatible') > -1) {
-    if (userAgent.indexOf('MSIE 10.0')) {
+    if (userAgent.indexOf('MSIE 10.0') > -1) {
       return { type: 'IE', version: 10.0 };
     }
-    if (userAgent.indexOf('MSIE 9.0')) {
+    if (userAgent.indexOf('MSIE 9.0') > -1) {
       return { type: 'IE', version: 9.0 };
     }
   }

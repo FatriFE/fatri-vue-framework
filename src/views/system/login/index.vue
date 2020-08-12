@@ -16,13 +16,7 @@
           </div>
           <div class="page-login--form" v-loading="loading">
             <el-card shadow="never">
-              <el-form
-                ref="loginForm"
-                label-position="top"
-                :rules="rules"
-                :model="formLogin"
-                size="default"
-              >
+              <el-form ref="loginForm" label-position="top" :rules="rules" :model="formLogin" size="default">
                 <el-form-item prop="username">
                   <el-input
                     type="text"
@@ -44,12 +38,9 @@
                     <i slot="prepend" class="el-icon-key"></i>
                   </el-input>
                 </el-form-item>
-                <el-button
-                  size="default"
-                  type="primary"
-                  @click="submit"
-                  class="button-login"
-                >{{ $t('common.login') }}</el-button>
+                <el-button size="default" type="primary" @click="submit" class="button-login">
+                  {{ $t('common.login') }}
+                </el-button>
               </el-form>
             </el-card>
           </div>
@@ -64,7 +55,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapActions } from 'vuex';
 import dayjs from 'dayjs';
 import CookieService from '@/util/CookieService';
 
@@ -109,9 +100,7 @@ export default {
     clearInterval(this.timeInterval);
   },
   methods: {
-    ...mapMutations({
-      INFO: 'system/user/INFO',
-    }),
+    ...mapActions('system/account', ['login', 'fetchAsideInfo']),
     refreshTime() {
       this.time = dayjs().format('HH:mm:ss');
     },
@@ -120,35 +109,32 @@ export default {
         if (!valid) {
           return;
         }
-        this.login();
+        this.toLogin();
       });
     },
-    login() {
-      const data = {
+    toLogin() {
+      this.login({
         username: this.formLogin.username,
         password: this.formLogin.password,
-      };
-      this.loading = true;
-      this.$api.account
-        .accountLogin(data)
-        .then((data) => {
-          const { accessToken } = data;
-          CookieService.setCookie('Business-Token', accessToken, 1);
-
-          this.getAccountInfo();
+      })
+        .then((flag) => {
+          if (!flag) {
+            this.$msg.error('登录失败，请稍后重试');
+            return;
+          }
+          this.toFetchAsideInfo();
         })
-        .catch((error) => {
-          this.$msg.error(error);
-        })
-        .finally(() => {
-          this.loading = false;
+        .catch((err) => {
+          this.$msg.error(err);
         });
     },
-    getAccountInfo() {
-      this.$api.user
-        .getAccountInfo()
-        .then((data) => {
-          this.INFO(data);
+    toFetchAsideInfo() {
+      this.fetchAsideInfo()
+        .then((flag) => {
+          if (!flag) {
+            this.$msg.error('用户信息获取失败，请稍后重试');
+            return;
+          }
           // 重定向对象不存在则返回顶层路径
           this.$router.replace(this.$route.query.redirect || '/');
         })
@@ -197,6 +183,12 @@ export default {
   }
   .page-login--content-header {
     padding: 1rem 0;
+  }
+  .page-login--content-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   .page-login--logo {
     width: 100px;

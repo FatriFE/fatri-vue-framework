@@ -2,7 +2,7 @@
   <div class="fe-aside-box">
     <el-menu
       class="fe-aside"
-      :collapse="collapsed"
+      :collapse="asideCollapse"
       :unique-opened="true"
       :default-active="active"
       background-color="#2b5e79"
@@ -10,8 +10,8 @@
       active-text-color="#fff"
       @select="handleSelect"
     >
-      <template v-if="asideList && asideList.length > 0">
-        <template v-for="(menu, index) in asideList">
+      <template v-if="aside && aside.length > 0">
+        <template v-for="(menu, index) in aside">
           <menu-item v-if="menu.children === undefined" :key="index + ''" :menu="menu"></menu-item>
           <sub-menu v-else :key="index + ''" :menu="menu"></sub-menu>
         </template>
@@ -37,11 +37,11 @@ export default {
     };
   },
   computed: {
-    ...mapState('system/layout', ['collapsed']),
-    ...mapState('system/aside', ['asideList']),
+    ...mapState('system/layout', ['asideCollapse']),
+    ...mapState('system/menu', ['aside']),
   },
   watch: {
-    collapsed(val) {
+    asideCollapse(val) {
       this.scrollDestroy();
       setTimeout(() => {
         this.scrollInit();

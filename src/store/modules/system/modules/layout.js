@@ -1,12 +1,12 @@
 export default {
   namespaced: true,
   state: {
-    collapsed: false,
+    asideCollapse: false,
     isFullscreen: false,
   },
   mutations: {
-    COLLAPSED(state, collapsed) {
-      state.collapsed = collapsed;
+    saveAsideCollapse(state, asideCollapse) {
+      state.asideCollapse = asideCollapse;
     },
     IS_FULL_SCREEN(state, fullscreen) {
       state.isFullscreen = fullscreen;

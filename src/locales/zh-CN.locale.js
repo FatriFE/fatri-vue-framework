@@ -13,6 +13,8 @@ module.exports = {
     cancel: '取消',
     login: '登录',
     logout: '退出登录',
+    logoutSure: '确定要退出登录吗',
+    cancelLogout: '取消登出操作',
     unlogin: '未登录',
     editPwd: '修改密码',
     userInfo: '用户信息',
