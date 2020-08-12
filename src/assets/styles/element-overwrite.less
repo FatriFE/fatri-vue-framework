@@ -48,6 +48,41 @@
   }
 }
 
+.el-drawer__wrapper {
+  &:focus {
+    outline: none;
+  }
+  .el-drawer__body:focus {
+    outline: none !important;
+  }
+}
+
 .el-submenu__icon-arrow {
   right: 10px !important;
+}
+
+.fade-transverse-leave-active,
+.fade-transverse-enter-active {
+  transition: all 0.5s;
+}
+.fade-transverse-enter {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+.fade-transverse-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+.fade-scale-leave-active,
+.fade-scale-enter-active {
+  transition: all 0.3s;
+}
+.fade-scale-enter {
+  opacity: 0;
+  transform: scale(1.2);
+}
+.fade-scale-leave-to {
+  opacity: 0;
+  transform: scale(0.8);
 }
