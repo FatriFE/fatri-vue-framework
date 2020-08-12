@@ -100,7 +100,7 @@ export default {
   bottom: 0;
   left: 0;
   .fe-aside {
-    width: 100%;
+    // width: 100%;
     border: none;
     .el-menu-item.is-active {
       background-color: #173f55 !important;
