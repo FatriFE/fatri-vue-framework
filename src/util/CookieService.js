@@ -1,30 +1,62 @@
 const CookieService = {
-  getCookie(key) {
-    const data = document.cookie;
-    let startIndex = data.indexOf(key + '=');
-    if (startIndex > -1) {
-      startIndex = startIndex + key.length + 1;
-      let endIndex = data.indexOf(';', startIndex);
-      endIndex = endIndex < 0 ? data.length : endIndex;
-      return decodeURIComponent(data.substring(startIndex, endIndex));
+  /**
+   * @description 获取cookie
+   * @param {*} name 名称
+   */
+  getCookie(name) {
+    const cookieName = encodeURIComponent(name) + '=';
+    const cookieStart = document.cookie.indexOf(cookieName);
+    let cookieValue = null;
+    if (cookieStart > -1) {
+      let cookieEnd = document.cookie.indexOf(';', cookieStart);
+      if (cookieEnd === -1) {
+        cookieEnd = document.cookie.length;
+      }
+      cookieValue = decodeURIComponent(document.cookie.substring(cookieStart + cookieName.length, cookieEnd));
     }
-    return '';
+    return cookieValue;
   },
-  setCookie(key, value, time) {
-    const times = time;
-    const cur = new Date();
-    cur.setTime(cur.getTime() + times * 24 * 3600 * 1000);
-    document.cookie =
-      key + '=' + encodeURIComponent(value) + ';expires=' + (times ? cur.toUTCString() : '') + ';path=/';
-  },
-  delCookie(key) {
-    const data = this.getCookie(key);
-    if (!data) {
-      return;
+  /**
+   * @description 添加cookie
+   * @param {*} name 名称
+   * @param {} value 值
+   * @param {} expires 失效时间
+   * @param {} path 路径
+   * @param {} domain 域
+   * @param {} secure 安全标志
+   */
+  setCookie(name, value, expires = 1, path = '/', domain, secure) {
+    let cookieText = encodeURIComponent(name) + '=' + encodeURIComponent(value);
+    if (expires instanceof Date) {
+      cookieText += '; expires=' + expires.toUTCString();
     }
-    const exp = new Date();
-    exp.setTime(exp.getTime() - 1);
-    document.cookie = key + '=' + encodeURIComponent(data) + ';expires=' + exp.toUTCString() + ';path=/';
+
+    if (typeof expires === 'number') {
+      const cur = new Date();
+      cur.setTime(cur.getTime() + expires * 24 * 3600 * 1000);
+      cookieText += '; expires=' + (expires ? cur.toUTCString() : '');
+    }
+
+    if (path) {
+      cookieText += '; path=' + path;
+    }
+    if (domain) {
+      cookieText += '; domain=' + domain;
+    }
+    if (secure) {
+      cookieText += '; secure';
+    }
+    document.cookie = cookieText;
+  },
+  /**
+   * @description 删除cookie
+   * @param {*} name 名称
+   * @param {} path 路径
+   * @param {} domain 域
+   * @param {} secure 安全标志
+   */
+  delCookie(name, path, domain, secure) {
+    this.setCookie(name, '', new Date(0), path, domain, secure);
   },
   clearLoginCookie() {
     this.delCookie('Business-Token');
