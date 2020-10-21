@@ -99,7 +99,7 @@ module.exports = {
       patterns: [
         {
           from: resolve('public'),
-          to: 'images',
+          to: '',
           globOptions: {
             ignore: ['**/*.html', '**/*.ico'],
           },

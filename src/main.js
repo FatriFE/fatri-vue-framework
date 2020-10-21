@@ -34,7 +34,8 @@ import '@/assets/styles/animate.css';
 import '@/assets/styles/element-overwrite.less';
 import '@/assets/styles/index.less';
 
-Vue.use(ElementUI);
+const locale = i18n.messages[i18n.locale];
+Vue.use(ElementUI, { locale });
 
 Vue.use(api);
 Vue.use(modal, { i18n, store, router });

@@ -16,14 +16,16 @@ function getNetworkIp() {
   try {
     const network = os.networkInterfaces();
     Object.keys(network).forEach((dev) => {
-      const iface = network[dev];
-      iface.every((alias) => {
-        if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
-          netHost = alias.address;
-          return false;
-        }
-        return true;
-      });
+      if (dev.indexOf('vEthernet') === -1) {
+        const iface = network[dev];
+        iface.every((alias) => {
+          if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
+            netHost = alias.address;
+            return false;
+          }
+          return true;
+        });
+      }
     });
   } catch (error) {
     netHost = '0.0.0.0';
