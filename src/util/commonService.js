@@ -112,10 +112,43 @@ export const decodeToken = (token) => {
   if (token.indexOf('.') === -1) {
     return {};
   }
-  const objStr = decodeURIComponent(escape(window.atob(token.split('.')[1])));
-  const newStr = objStr
-    .replace(/"subjectId":(\d+)/, '"subjectId":"$1"')
-    .replace(/"organizationId":(\d+)/, '"organizationId":"$1"')
-    .replace(/"tenantId":(\d+)/, '"tenantId":"$1"');
-  return JSON.parse(newStr);
+  let o;
+  try {
+    const objStr = decodeURIComponent(escape(window.atob(token.split('.')[1])));
+    let newStr = objStr
+      .replace(/"subjectId":(\d+)/, '"subjectId":"$1"')
+      .replace(/"organizationId":(\d+)/, '"organizationId":"$1"')
+      .replace(/"tenantId":(\d+)/, '"tenantId":"$1"');
+    const s = newStr.indexOf('{');
+    const e = newStr.indexOf('}');
+    newStr = newStr.slice(s, e + 1);
+    o = JSON.parse(newStr);
+  } catch (error) {
+    console.error('token is invalid');
+    o = {};
+  }
+  return o;
 };
+
+/**
+ * @description 异步加载高德地图
+ */
+export function loadMP() {
+  const mp = new Promise((resolve, reject) => {
+    let hasLoaded = document.getElementById('amap');
+    if (hasLoaded) {
+      resolve(AMap);
+      return;
+    }
+    window.init = function () {
+      resolve(AMap);
+    };
+    let script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://webapi.amap.com/maps?v=1.4.15&key=afab6449e9193d57d031a489545a7b9a&callback=init';
+    script.id = 'amap';
+    script.onerror = reject;
+    document.head.appendChild(script);
+  });
+  return mp;
+}

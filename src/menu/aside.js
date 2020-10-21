@@ -21,4 +21,9 @@ export default [
       },
     ],
   },
+  {
+    path: '/test',
+    title: '单元测试',
+    icon: 'el-icon-s-tools',
+  },
 ];

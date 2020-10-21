@@ -33,6 +33,14 @@ const frameIn = [
         },
         component: _import('business/role'),
       },
+      {
+        path: 'test',
+        name: 'test',
+        meta: {
+          auth: true,
+        },
+        component: _import('business/test'),
+      },
       // 刷新页面 必须保留 勿删
       {
         path: 'refresh',
