@@ -19,10 +19,9 @@ service.interceptors.request.use(
     }
     return config;
   },
-  (error) => {
-    console.log(error);
-    return Promise.reject(error);
-  }
+  (error) =>
+    // console.error(error);
+    Promise.reject(error)
 );
 
 service.interceptors.response.use(
@@ -36,10 +35,10 @@ service.interceptors.response.use(
       case 0:
         return dataAxios.data;
       case 'xxx':
-        console.log(`[ code: xxx ] ${dataAxios.msg}: ${response.config.url}`);
+        // console.error(`[ code: xxx ] ${dataAxios.msg}: ${response.config.url}`);
         break;
       default:
-        console.log(`${dataAxios.msg}: ${response.config.url}`);
+        // console.error(`${dataAxios.msg}: ${response.config.url}`);
         break;
     }
     return false;

@@ -21,7 +21,6 @@ export default {
             resolve(true);
           })
           .catch((err) => {
-            console.log('err: ', err);
             reject(err);
           });
       });
@@ -42,7 +41,6 @@ export default {
             resolve(true);
           })
           .catch((err) => {
-            console.log('err: ', err);
             reject(err);
           });
       });
