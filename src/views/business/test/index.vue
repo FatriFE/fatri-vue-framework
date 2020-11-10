@@ -4,6 +4,7 @@
 
 <script>
 import ToDoList from './list.vue';
+
 export default {
   components: { ToDoList },
 };

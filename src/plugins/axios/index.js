@@ -15,14 +15,13 @@ service.interceptors.request.use(
   (config) => {
     if (config.url.indexOf('login') === -1) {
       const token = CookieService.getCookie('Business-Token');
-      config.headers['Authorization'] = token;
+      config.headers.Authorization = token;
     }
     return config;
   },
-  (error) => {
-    console.log(error);
-    return Promise.reject(error);
-  }
+  (error) =>
+    // console.error(error);
+    Promise.reject(error)
 );
 
 service.interceptors.response.use(
@@ -31,18 +30,18 @@ service.interceptors.response.use(
     const { code } = dataAxios;
     if (code === undefined) {
       return dataAxios;
-    } else {
-      switch (code) {
-        case 0:
-          return dataAxios.data;
-        case 'xxx':
-          console.log(`[ code: xxx ] ${dataAxios.msg}: ${response.config.url}`);
-          break;
-        default:
-          console.log(`${dataAxios.msg}: ${response.config.url}`);
-          break;
-      }
     }
+    switch (code) {
+      case 0:
+        return dataAxios.data;
+      case 'xxx':
+        // console.error(`[ code: xxx ] ${dataAxios.msg}: ${response.config.url}`);
+        break;
+      default:
+        // console.error(`${dataAxios.msg}: ${response.config.url}`);
+        break;
+    }
+    return false;
   },
   (error) => {
     if (error && error.response) {
@@ -88,6 +87,7 @@ service.interceptors.response.use(
       }
       return Promise.reject(error);
     }
+    return false;
   }
 );
 
