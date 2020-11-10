@@ -22,7 +22,7 @@ export const getFloat = (num, n) => {
   if (isNaN(result)) {
     return '';
   }
-  let total = n ? parseInt(n) : 0;
+  const total = n ? parseInt(n, 10) : 0;
   if (total <= 0) {
     return Math.round(result) + '';
   }
@@ -70,7 +70,7 @@ function getVersion(versionStr) {
   return parseFloat(version);
 }
 export const getBrowserType = () => {
-  const userAgent = navigator.userAgent;
+  const { userAgent } = navigator;
   if (userAgent.indexOf('Firefox') > -1) {
     const versionStr = userAgent.split('Firefox/')[1].split(' ')[0];
     const version = getVersion(versionStr);
@@ -135,15 +135,15 @@ export const decodeToken = (token) => {
  */
 export function loadMP() {
   const mp = new Promise((resolve, reject) => {
-    let hasLoaded = document.getElementById('amap');
+    const hasLoaded = document.getElementById('amap');
     if (hasLoaded) {
       resolve(AMap);
       return;
     }
-    window.init = function () {
+    window.init = function init() {
       resolve(AMap);
     };
-    let script = document.createElement('script');
+    const script = document.createElement('script');
     script.type = 'text/javascript';
     script.src = 'https://webapi.amap.com/maps?v=1.4.15&key=afab6449e9193d57d031a489545a7b9a&callback=init';
     script.id = 'amap';

@@ -7,9 +7,9 @@ if (process.env && process.env.NODE_ENV === 'development') {
 }
 
 if (window.location.protocol === 'https:') {
-  websocket = 'wss://' + websocket;
+  websocket = `wss://${websocket}`;
 } else {
-  websocket = 'ws://' + websocket;
+  websocket = `ws://${websocket}`;
 }
 
 export const baseUrl = base;

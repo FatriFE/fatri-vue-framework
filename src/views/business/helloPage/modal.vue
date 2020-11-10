@@ -16,7 +16,7 @@
   </div>
 </template>
 <script>
-import modalMixin from '@/plugins/modal/mixin.js';
+import modalMixin from '@/plugins/modal/mixin';
 
 export default {
   name: 'example-modal',
